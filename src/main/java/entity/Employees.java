@@ -1,26 +1,26 @@
 package entity;
 
 public class Employees {
-    private int employeeNumber;
+    private int employee_Number;
     private String firstName;
     private String lastName;
     private int officeCode;
-    private int addressId;
+    private int address_Id;
 
-    public Employees(int employeeNumber, String firstName, String lastName, int officeCode, int addressId) {
-        this.employeeNumber = employeeNumber;
+    public Employees(int employee_Number, String firstName, String lastName, int officeCode, int address_Id) {
+        this.employee_Number = employee_Number;
         this.firstName = firstName;
         this.lastName = lastName;
         this.officeCode = officeCode;
-        this.addressId = addressId;
+        this.address_Id = address_Id;
     }
 
-    public int getEmployeeNumber() {
-        return employeeNumber;
+    public int getEmployee_Number() {
+        return employee_Number;
     }
 
-    public void setEmployeeNumber(int employeeNumber) {
-        this.employeeNumber = employeeNumber;
+    public void setEmployee_Number(int employee_Number) {
+        this.employee_Number = employee_Number;
     }
 
     public String getFirstName() {
@@ -47,11 +47,22 @@ public class Employees {
         this.officeCode = officeCode;
     }
 
-    public int getAddressId() {
-        return addressId;
+    public int getAddress_Id() {
+        return address_Id;
     }
 
-    public void setAddressId(int addressId) {
-        this.addressId = addressId;
+    public void setAddress_Id(int address_Id) {
+        this.address_Id = address_Id;
+    }
+
+    @Override
+    public String toString() {
+        return "Employees{" +
+                "employee_Number=" + employee_Number +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", officeCode=" + officeCode +
+                ", address_Id=" + address_Id +
+                '}';
     }
 }
