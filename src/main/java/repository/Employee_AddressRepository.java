@@ -26,5 +26,14 @@ public class Employee_AddressRepository {
         return result;
     }
 
-
+    public int saveAddress(EmployeeAddress employeeAddress) throws SQLException {
+        String add = "INSERT INTO employeeAddress (address_Id, city, street, postalCode) VALUES (?,?,?,?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(add);
+        preparedStatement.setInt(1,employeeAddress.getAddress_Id());
+        preparedStatement.setString(2,employeeAddress.getCity());
+        preparedStatement.setString(3,employeeAddress.getStreet());
+        preparedStatement.setString(4,employeeAddress.getPostalCode());
+        int result = preparedStatement.executeUpdate();
+        return result;
+    }
 }
