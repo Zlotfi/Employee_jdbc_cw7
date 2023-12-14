@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS employee(
-    employee_Number VARCHAR(50) NOT NULL,
+    employee_Number INT NOT NULL,
     firstName VARCHAR(50) NOT NULL,
     lastName VARCHAR(50) NOT NULL,
     officeCode int NOT NULL,
