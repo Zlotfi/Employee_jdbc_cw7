@@ -1,24 +1,24 @@
 package entity;
 
 public class EmployeeAddress {
-    private int addressId;
+    private int address_Id;
     private String city;
     private String street;
     private String postalCode;
 
-    public EmployeeAddress(int addressId, String city, String street, String postalCode) {
-        this.addressId = addressId;
+    public EmployeeAddress(int address_Id, String city, String street, String postalCode) {
+        this.address_Id = address_Id;
         this.city = city;
         this.street = street;
         this.postalCode = postalCode;
     }
 
-    public int getAddressId() {
-        return addressId;
+    public int getAddress_Id() {
+        return address_Id;
     }
 
-    public void setAddressId(int addressId) {
-        this.addressId = addressId;
+    public void setAddress_Id(int address_Id) {
+        this.address_Id = address_Id;
     }
 
     public String getCity() {
@@ -43,5 +43,15 @@ public class EmployeeAddress {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeAddress{" +
+                "address_Id=" + address_Id +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                '}';
     }
 }
