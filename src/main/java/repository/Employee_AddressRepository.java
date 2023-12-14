@@ -37,4 +37,29 @@ public class Employee_AddressRepository {
         int result = preparedStatement.executeUpdate();
         return result;
     }
+
+    public void getEmployeeAddress(int employee_Number) throws SQLException {
+        String selectQuery = "SELECT * " +
+                "FROM employeeAddress " +
+                "INNER JOIN employee ON (employeeAddress.address_Id = employee.address_Id) " +
+                "WHERE employee_Number = ? " +
+                "ORDER BY employeeAddress.address_Id";
+        PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
+        preparedStatement.setInt(1, employee_Number);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            String city = resultSet.getString("city");
+            String street = resultSet.getString("street");
+            String postalCode = resultSet.getString("postalcode");
+
+            System.out.println("Address for employee " + employee_Number + ":");
+            System.out.println("City: " + city);
+            System.out.println("Street: " + street);
+            System.out.println("Postal code: " + postalCode);
+        } else {
+            System.out.println("Address not found for employee " + employee_Number);
+        }
+    }
 }
+
