@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS employee(
 );
 
 CREATE TABLE IF NOT EXISTS employeeAddress(
-    address_Id INTEGER REFERENCES employee(address_Id),
+    address_Id int REFERENCES employee(address_Id),
     city VARCHAR(50) NOT NULL,
     street VARCHAR(50) NOT NULL,
     postalCode VARCHAR(50) NOT NULL
