@@ -1,7 +1,7 @@
 package entity;
 
 public class Employees {
-    private int employee_Number;
+    private String employee_Number;
     private String firstName;
     private String lastName;
     private int officeCode;
