@@ -1,13 +1,13 @@
 package entity;
 
 public class Employees {
-    private String employee_Number;
+    private int employee_Number;
     private String firstName;
     private String lastName;
     private int officeCode;
     private int address_Id;
 
-    public Employees(String employee_Number, String firstName, String lastName, int officeCode, int address_Id) {
+    public Employees(int employee_Number, String firstName, String lastName, int officeCode, int address_Id) {
         this.employee_Number = employee_Number;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -15,11 +15,11 @@ public class Employees {
         this.address_Id = address_Id;
     }
 
-    public String getEmployee_Number() {
+    public int getEmployee_Number() {
         return employee_Number;
     }
 
-    public void setEmployee_Number(String employee_Number) {
+    public void setEmployee_Number(int employee_Number) {
         this.employee_Number = employee_Number;
     }
 
