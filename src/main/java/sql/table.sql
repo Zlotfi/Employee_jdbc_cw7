@@ -5,3 +5,10 @@ CREATE TABLE IF NOT EXISTS employee(
     officeCode int NOT NULL,
     address_Id SERIAL PRIMARY KEY
 );
+
+CREATE TABLE IF NOT EXISTS employeeAddress(
+    address_Id INTEGER REFERENCES employee(address_Id),
+    city VARCHAR(50) NOT NULL,
+    street VARCHAR(50) NOT NULL,
+    postalCode VARCHAR(50) NOT NULL
+);
