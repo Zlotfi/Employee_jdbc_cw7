@@ -16,19 +16,25 @@ public class Employee_AddressRepository {
     public Employee_AddressRepository() throws SQLException {
     }
 
-    public static void addEmployee(Connection connection, String firstName, String lastName, int employeeNumber, String city, String postalCode) throws SQLException {
-        String insertEmployeeQuery = "INSERT INTO employees (employeeNumber, lastName, firstName) VALUES (?, ?, ?)";
-        PreparedStatement insertEmployeeStmt = connection.prepareStatement(insertEmployeeQuery);
-        insertEmployeeStmt.setInt(1, employeeNumber);
-        insertEmployeeStmt.setString(2, lastName);
-        insertEmployeeStmt.setString(3, firstName);
-        insertEmployeeStmt.executeUpdate();
+    public int saveEmployee(Employees employees) throws SQLException {
+        String add = "INSERT INTO employee (employee_Number, firstName, lastName, officeCode) VALUES (?,?,?,?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(add);
+        preparedStatement.setInt(1,employees.getEmployee_Number());
+        preparedStatement.setString(2, employees.getFirstName());
+        preparedStatement.setString(3, employees.getLastName());
+        preparedStatement.setInt(4,employees.getOfficeCode());
+        int result = preparedStatement.executeUpdate();
+        return result;
+    }
 
-        String insertAddressQuery = "INSERT INTO employeeAddress (addressId, city, postalCode) VALUES (?, ?, ?)";
-        PreparedStatement insertAddressStmt = connection.prepareStatement(insertAddressQuery);
-        insertAddressStmt.setInt(1, employeeNumber);
-        insertAddressStmt.setString(2, city);
-        insertAddressStmt.setString(3, postalCode);
-        insertAddressStmt.executeUpdate();
+    public int saveAddress(EmployeeAddress employeeAddress) throws SQLException {
+        String add = "INSERT INTO employeeAddress (address_Id, city, street, postalCode) VALUES (?,?,?,?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(add);
+        preparedStatement.setInt(1,employeeAddress.getAddress_Id());
+        preparedStatement.setString(2,employeeAddress.getCity());
+        preparedStatement.setString(3,employeeAddress.getStreet());
+        preparedStatement.setString(4,employeeAddress.getPostalCode());
+        int result = preparedStatement.executeUpdate();
+        return result;
     }
 }
