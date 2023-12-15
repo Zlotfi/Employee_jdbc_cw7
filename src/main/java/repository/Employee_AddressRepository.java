@@ -61,5 +61,19 @@ public class Employee_AddressRepository {
             System.out.println("Address not found for employee " + employee_Number);
         }
     }
+
+    public int updateEmployee(int officeCode, String city, String street, String postalCode, int address_Id) throws SQLException {
+        String query = "UPDATE employeeAddress" +
+                "INNER JOIN employee ON (employeeAddress.address_Id = employee.address_Id)" +
+                " SET officeCode = ?, city = ?, street = ?, postalCode = ? WHERE address_Id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, officeCode);
+        preparedStatement.setString(2,city);
+        preparedStatement.setString(3, street);
+        preparedStatement.setString(4, postalCode);
+        preparedStatement.setInt(5,address_Id);
+        int result = preparedStatement.executeUpdate();
+        return result;
+    }
 }
 
