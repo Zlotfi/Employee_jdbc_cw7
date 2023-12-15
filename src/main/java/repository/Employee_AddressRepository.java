@@ -62,18 +62,46 @@ public class Employee_AddressRepository {
         }
     }
 
-    public int updateEmployee(int officeCode, String city, String street, String postalCode, int address_Id) throws SQLException {
-        String query = "UPDATE employeeAddress" +
-                "INNER JOIN employee ON (employeeAddress.address_Id = employee.address_Id)" +
-                " SET officeCode = ?, city = ?, street = ?, postalCode = ? WHERE address_Id = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setInt(1, officeCode);
-        preparedStatement.setString(2,city);
-        preparedStatement.setString(3, street);
-        preparedStatement.setString(4, postalCode);
-        preparedStatement.setInt(5,address_Id);
-        int result = preparedStatement.executeUpdate();
-        return result;
+//    public int updateEmployee(int officeCode, String city, String street, String postalCode, int address_Id) throws SQLException {
+//        String query = "UPDATE employee" +
+//                "LEFT JOIN employeeAddress ON (employeeAddress.address_Id = employee.address_Id)" +
+//                " SET officeCode = ?, city = ?, street = ?, postalCode = ? WHERE address_Id = ?";
+//        PreparedStatement preparedStatement = connection.prepareStatement(query);
+//        preparedStatement.setInt(1, officeCode);
+//        preparedStatement.setString(2,city);
+//        preparedStatement.setString(3, street);
+//        preparedStatement.setString(4, postalCode);
+//        preparedStatement.setInt(5,address_Id);
+//        int result = preparedStatement.executeUpdate();
+//        return result;
+//    }
+public int updateEmployee(int address_Id, int officeCode, String city, String street, String postalCode) {
+    try {
+        // بروزرسانی officeCode در جدول employees
+        String updateOfficeCodeQuery = "UPDATE employee SET officeCode = ? WHERE address_Id = ?";
+        PreparedStatement officeCodeStatement = connection.prepareStatement(updateOfficeCodeQuery);
+        officeCodeStatement.setInt(1, officeCode);
+        officeCodeStatement.setInt(2, address_Id);
+        int officeCodeResult = officeCodeStatement.executeUpdate();
+
+        // بروزرسانی آدرس در جدول employeeAddress
+        String updateAddressQuery = "UPDATE employeeAddress SET city = ?, street = ?, postalCode = ? WHERE address_Id = ?";
+        PreparedStatement addressStatement = connection.prepareStatement(updateAddressQuery);
+        addressStatement.setString(1, city);
+        addressStatement.setString(2, street);
+        addressStatement.setString(3, postalCode);
+        addressStatement.setInt(4, address_Id);
+        int addressResult = addressStatement.executeUpdate();
+
+        if (officeCodeResult > 0 && addressResult > 0) {
+            System.out.println("اطلاعات کارمند با موفقیت به‌روزرسانی شد.");
+        } else {
+            System.out.println("کارمند با شماره پرسنلی " + address_Id + " یافت نشد.");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return 0;
+}
 }
 
