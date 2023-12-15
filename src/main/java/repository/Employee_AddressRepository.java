@@ -104,30 +104,26 @@ public int updateEmployee(int address_Id, int officeCode, String city, String st
     return 0;
 }
 
-    public int deleteEmployee(int address_Id) {
+    public void deleteEmployee(int address_Id) {
         try {
-            // حذف اطلاعات کارمند از جدول employees
-            String deleteEmployeeQuery = "DELETE FROM employee WHERE address_Id = ?";
-            PreparedStatement employeeStatement = connection.prepareStatement(deleteEmployeeQuery);
-            employeeStatement.setInt(1, address_Id);
-            int employeeResult = employeeStatement.executeUpdate();
-
-            // حذف اطلاعات آدرس مرتبط از جدول employeeAddress
+            // حذف آدرس کارمند
             String deleteAddressQuery = "DELETE FROM employeeAddress WHERE address_Id = ?";
             PreparedStatement addressStatement = connection.prepareStatement(deleteAddressQuery);
             addressStatement.setInt(1, address_Id);
-            int addressResult = addressStatement.executeUpdate();
 
-            if (employeeResult > 0 && addressResult > 0) {
+            // حذف رکورد کارمند
+            String deleteEmployeeQuery = "DELETE FROM employee WHERE address_Id = ?";
+            PreparedStatement employeeStatement = connection.prepareStatement(deleteEmployeeQuery);
+            employeeStatement.setInt(1, address_Id);
+
+            if (addressStatement.executeUpdate() > 0 || employeeStatement.executeUpdate() > 0) {
                 System.out.println("اطلاعات کارمند با موفقیت حذف شد.");
             } else {
-                System.out.println("کارمند با شماره پرسنلی " + address_Id + " یافت نشد.");
+                System.out.println("کارمند با شناسه آدرس " + address_Id + " یافت نشد.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0;
     }
-
 }
 
