@@ -103,5 +103,31 @@ public int updateEmployee(int address_Id, int officeCode, String city, String st
     }
     return 0;
 }
+
+    public int deleteEmployee(int address_Id) {
+        try {
+            // حذف اطلاعات کارمند از جدول employees
+            String deleteEmployeeQuery = "DELETE FROM employee WHERE address_Id = ?";
+            PreparedStatement employeeStatement = connection.prepareStatement(deleteEmployeeQuery);
+            employeeStatement.setInt(1, address_Id);
+            int employeeResult = employeeStatement.executeUpdate();
+
+            // حذف اطلاعات آدرس مرتبط از جدول employeeAddress
+            String deleteAddressQuery = "DELETE FROM employeeAddress WHERE address_Id = ?";
+            PreparedStatement addressStatement = connection.prepareStatement(deleteAddressQuery);
+            addressStatement.setInt(1, address_Id);
+            int addressResult = addressStatement.executeUpdate();
+
+            if (employeeResult > 0 && addressResult > 0) {
+                System.out.println("اطلاعات کارمند با موفقیت حذف شد.");
+            } else {
+                System.out.println("کارمند با شماره پرسنلی " + address_Id + " یافت نشد.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
 }
 
