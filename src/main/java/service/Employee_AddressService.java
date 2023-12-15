@@ -56,4 +56,8 @@ public class Employee_AddressService {
         else
             System.out.println("OOps!:(");
     }
+
+    public void delete(int address_Id) throws SQLException {
+        employeeAddressRepository.deleteEmployee(address_Id);
+    }
 }
