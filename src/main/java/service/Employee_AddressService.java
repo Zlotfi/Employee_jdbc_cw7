@@ -35,4 +35,25 @@ public class Employee_AddressService {
         int employeeNumber = scanner.nextInt();
         employeeAddressRepository.getEmployeeAddress(employee_Number);
     }
+
+    public void changeEmployee(int address_Id) throws SQLException {
+        System.out.println("please enter your new office code: ");
+        int officeCode = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("please enter your new city: ");
+        String city = scanner.nextLine();
+
+
+        System.out.println("please enter your new street: ");
+        String street = scanner.nextLine();
+
+        System.out.println("please enter your new postal code: ");
+        String postalCode = scanner.nextLine();
+
+        int result = employeeAddressRepository.updateEmployee(address_Id,officeCode,city,street,postalCode);
+        if (result != 0)
+            System.out.println("successfully update to database");
+        else
+            System.out.println("OOps!:(");
+    }
 }
